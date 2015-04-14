@@ -1,6 +1,6 @@
 {
   "name": "cirrus-tlDataServices",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "authors": [
     "Marco Bachmann <mb@triarc-labs.com>"
   ],
@@ -16,6 +16,9 @@
     "test",
     "tests"
   ],
+  "typescript": {
+    "definition": "tlDataServices.d.ts"
+  },
   "endpoint": "https://github.com/triarc/cirrus-tlDataServices.git",
   "dependencies": {}
 }
