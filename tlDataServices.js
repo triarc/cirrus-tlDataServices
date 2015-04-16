@@ -3,8 +3,7 @@ var Triarc;
     var Data;
     (function (Data) {
         var DataRequest = (function () {
-            function DataRequest($location, method, url, data, managedType, returnType, sendData) {
-                this.$location = $location;
+            function DataRequest(method, url, data, managedType, returnType, sendData) {
                 this.method = method;
                 this.url = url;
                 this.data = data;

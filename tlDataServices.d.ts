@@ -1,15 +1,12 @@
 declare module Triarc.Data {
     class DataRequest<TResponse> {
-        $http: ng.IHttpService;
-        $q: ng.IQService;
-        $location: ng.ILocationService;
         method: string;
         url: string;
         data: any;
         managedType: string;
         returnType: string;
         sendData: boolean;
-        constructor($http: ng.IHttpService, $q: ng.IQService, $location: ng.ILocationService, method: string, url: string, data: any, managedType: string, returnType: string, sendData: boolean);
+        constructor(method: string, url: string, data: any, managedType: string, returnType: string, sendData: boolean);
     }
 }
 declare module Triarc.Data {
@@ -37,5 +34,4 @@ declare module Triarc.Data {
 declare module Triarc.Data {
     function convertDateStringsToDates(input: any): any;
     var mod: ng.IModule;
-    function requestValue<T>(dataRequest: DataRequest<T>): ng.IPromise<DataResponse<T>>;
 }
