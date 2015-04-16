@@ -99,7 +99,6 @@ var Triarc;
                 });
             }
         ]);
-        var regexMs = "^/Date\\((\\d+)\\)/$"; // regex used to identify the dates
         function convertDateStringsToDates(input) {
             // Ignore things that aren't objects.
             if (typeof input !== "object")
@@ -108,12 +107,13 @@ var Triarc;
                 if (!input.hasOwnProperty(key))
                     continue;
                 var value = input[key];
-                var match;
                 // Check for string properties which look like dates.
                 // TODO: Improve this regex to better match ISO 8601 date strings.
-                if (typeof value === "string" && (match = value.match(regexMs))) {
-                    // Assume that Date.parse can parse ISO 8601 strings, or has been shimmed in older browsers to do so.
-                    input[key] = new Date(parseInt(match[1])); // eval(value);// Date.parse(match[0]);
+                if (typeof value === "string") {
+                    var parsedDate = Date.parse(value);
+                    if (!isNaN(parsedDate)) {
+                        input[key] = parsedDate;
+                    }
                 }
                 else if (typeof value === "object") {
                     // Recurse into object
