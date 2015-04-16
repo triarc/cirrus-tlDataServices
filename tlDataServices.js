@@ -3,9 +3,7 @@ var Triarc;
     var Data;
     (function (Data) {
         var DataRequest = (function () {
-            function DataRequest($http, $q, $location, method, url, data, managedType, returnType, sendData) {
-                this.$http = $http;
-                this.$q = $q;
+            function DataRequest($location, method, url, data, managedType, returnType, sendData) {
                 this.$location = $location;
                 this.method = method;
                 this.url = url;
@@ -135,28 +133,49 @@ var Triarc;
                 };
             }
         ]);
-        function requestValue(dataRequest) {
-            var deferred = dataRequest.$q.defer();
-            // make the http call
-            dataRequest.$http({
-                method: dataRequest.method,
-                url: dataRequest.url,
-                data: dataRequest.sendData ? dataRequest.data : null
-            }).then(function (response) {
-                var responseData = response.data;
-                if (dataRequest.returnType == "boolean")
-                    responseData = (responseData == "true");
-                else if (dataRequest.returnType == "number")
-                    responseData = +responseData;
-                else if (dataRequest.returnType != "string" && responseData == "null")
-                    responseData = null;
-                deferred.resolve(new Data.DataResponse(responseData, 0 /* Success */, response));
-            }, function (response) {
-                deferred.reject(new Data.DataResponse(response.data, 1 /* Failure */, response));
-            });
-            return deferred.promise;
-        }
-        Data.requestValue = requestValue;
+        Data.mod.provider('$requestSender', [
+            function () {
+                var url = "api";
+                return {
+                    setUrl: function (newUrl) {
+                        url = newUrl;
+                    },
+                    $get: [
+                        '$http',
+                        '$q',
+                        '$location',
+                        function ($http, $q, $location) {
+                            return {
+                                getUrl: function () {
+                                    return url;
+                                },
+                                requestValue: function (dataRequest) {
+                                    var deferred = $q.defer();
+                                    // make the http call
+                                    $http({
+                                        method: dataRequest.method,
+                                        url: dataRequest.url,
+                                        data: dataRequest.sendData ? dataRequest.data : null
+                                    }).then(function (response) {
+                                        var responseData = response.data;
+                                        if (dataRequest.returnType == "boolean")
+                                            responseData = (responseData == "true");
+                                        else if (dataRequest.returnType == "number")
+                                            responseData = +responseData;
+                                        else if (dataRequest.returnType != "string" && responseData == "null")
+                                            responseData = null;
+                                        deferred.resolve(new Data.DataResponse(responseData, 0 /* Success */, response));
+                                    }, function (response) {
+                                        deferred.reject(new Data.DataResponse(response.data, 1 /* Failure */, response));
+                                    });
+                                    return deferred.promise;
+                                }
+                            };
+                        }
+                    ]
+                };
+            }
+        ]);
     })(Data = Triarc.Data || (Triarc.Data = {}));
 })(Triarc || (Triarc = {}));
 
