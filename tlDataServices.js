@@ -175,6 +175,7 @@ var Triarc;
                 this.$get = ['$http', '$q', '$location', function ($http, $q, $location) {
                     return new RequestSenderService(_this.urlPerService, $http, $q, $location);
                 }];
+                this.urlPerService = {};
             }
             RequestSenderProvider.prototype.setUrl = function (newUrl, proxyServiceName) {
                 this.urlPerService[proxyServiceName] = newUrl;
