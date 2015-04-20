@@ -112,7 +112,7 @@ var Triarc;
                 if (typeof value === "string" && (match = value.match(regexIso8601))) {
                     var parsedDate = Date.parse(match[0]);
                     if (!isNaN(parsedDate)) {
-                        input[key] = parsedDate;
+                        input[key] = new Date(parsedDate);
                     }
                 }
                 else if (typeof value === "object") {
