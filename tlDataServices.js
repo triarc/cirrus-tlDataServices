@@ -99,7 +99,7 @@ var Triarc;
                 });
             }
         ]);
-        var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
+        var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})[+-](\d{2})\:(\d{2})$/;
         function convertDateStringsToDates(input) {
             // Ignore things that aren't objects.
             if (typeof input !== "object")
