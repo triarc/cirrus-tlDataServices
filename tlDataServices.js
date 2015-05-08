@@ -99,6 +99,7 @@ var Triarc;
                 });
             }
         ]);
+        // fixed
         var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})[+-](\d{2})\:(\d{2})$/;
         function convertDateStringsToDates(input) {
             // Ignore things that aren't objects.
