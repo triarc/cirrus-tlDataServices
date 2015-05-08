@@ -100,7 +100,7 @@ var Triarc;
             }
         ]);
         // fixed
-        var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})[+-](\d{2})\:(\d{2})$/;
+        var regexIso8601 = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
         function convertDateStringsToDates(input) {
             // Ignore things that aren't objects.
             if (typeof input !== "object")
