@@ -156,7 +156,7 @@ var Triarc;
                 }).then(function (response) {
                     var responseData = response.data;
                     if (dataRequest.returnType == "boolean")
-                        responseData = (responseData == "true");
+                        responseData = (responseData == "true" || responseData === true);
                     else if (dataRequest.returnType == "number")
                         responseData = +responseData;
                     else if (dataRequest.returnType != "string" && responseData == "null")
