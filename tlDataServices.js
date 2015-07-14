@@ -142,8 +142,12 @@ var Triarc;
             }
             RequestSenderService.prototype.getUrl = function (serviceName) {
                 var url = this.urlByService[serviceName];
-                if (angular.isString(url))
+                if (typeof url === "string") {
                     return url;
+                }
+                else if (typeof url === "function") {
+                    return url();
+                }
                 return "api";
             };
             RequestSenderService.prototype.requestValue = function (dataRequest) {

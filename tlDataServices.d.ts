@@ -40,16 +40,16 @@ declare module Triarc.Data {
         private $q;
         private $location;
         constructor(urlByService: {
-            [serviceName: string]: string;
+            [serviceName: string]: (() => string) | string;
         }, $http: ng.IHttpService, $q: ng.IQService, $location: ng.ILocationService);
         getUrl(serviceName: string): string;
         requestValue<T>(dataRequest: DataRequest<T>): ng.IPromise<DataResponse<T>>;
     }
     class RequestSenderProvider implements ng.IServiceProvider {
-        setUrl(newUrl: string, proxyServiceName: string): void;
+        setUrl(newUrl: () => string | string, proxyServiceName: string): void;
         $get: (string | (($http: ng.IHttpService, $q: ng.IQService, $location: ng.ILocationService) => RequestSenderService))[];
         urlPerService: {
-            [serviceName: string]: string;
+            [serviceName: string]: () => string | string;
         };
     }
 }
