@@ -46,10 +46,10 @@ declare module Triarc.Data {
         requestValue<T>(dataRequest: DataRequest<T>): ng.IPromise<DataResponse<T>>;
     }
     class RequestSenderProvider implements ng.IServiceProvider {
-        setUrl(newUrl: () => string | string, proxyServiceName: string): void;
+        setUrl(newUrl: (() => string) | string, proxyServiceName: string): void;
         $get: (string | (($http: ng.IHttpService, $q: ng.IQService, $location: ng.ILocationService) => RequestSenderService))[];
         urlPerService: {
-            [serviceName: string]: () => string | string;
+            [serviceName: string]: (() => string) | string;
         };
     }
 }
