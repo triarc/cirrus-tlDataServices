@@ -13,8 +13,8 @@ declare module Triarc.Data {
     class DataResponse<T> {
         data: T;
         status: RequestStatus;
-        httpReponse: ng.IHttpPromiseCallbackArg<T>;
-        constructor(data: T, status?: RequestStatus, httpReponse?: ng.IHttpPromiseCallbackArg<T>);
+        httpReponse: angular.IHttpPromiseCallbackArg<T>;
+        constructor(data: T, status?: RequestStatus, httpReponse?: angular.IHttpPromiseCallbackArg<T>);
         isSuccessful(): boolean;
         isFailure(): RequestStatus;
         isValidationSuccessful(): boolean;
@@ -41,11 +41,11 @@ declare module Triarc.Data {
         private $location;
         constructor(urlByService: {
             [serviceName: string]: (() => string) | string;
-        }, $http: ng.IHttpService, $q: ng.IQService, $location: ng.ILocationService);
+        }, $http: angular.IHttpService, $q: angular.IQService, $location: angular.ILocationService);
         getUrl(serviceName: string): string;
-        requestValue<T>(dataRequest: DataRequest<T>): ng.IPromise<DataResponse<T>>;
+        requestValue<T>(dataRequest: DataRequest<T>): angular.IPromise<DataResponse<T>>;
     }
-    class RequestSenderProvider implements ng.IServiceProvider {
+    class RequestSenderProvider implements angular.IServiceProvider {
         setUrl(newUrl: (() => string) | string, proxyServiceName: string): void;
         $get: (string | (($http: ng.IHttpService, $q: ng.IQService, $location: ng.ILocationService) => RequestSenderService))[];
         urlPerService: {

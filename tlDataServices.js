@@ -22,22 +22,22 @@ var Triarc;
     (function (Data) {
         var DataResponse = (function () {
             function DataResponse(data, status, httpReponse) {
-                if (status === void 0) { status = 0 /* Success */; }
+                if (status === void 0) { status = Data.RequestStatus.Success; }
                 this.data = data;
                 this.status = status;
                 this.httpReponse = httpReponse;
             }
             DataResponse.prototype.isSuccessful = function () {
-                return this.status == 0 /* Success */;
+                return this.status == RequestStatus.Success;
             };
             DataResponse.prototype.isFailure = function () {
-                return this.status = 1 /* Failure */;
+                return this.status = RequestStatus.Failure;
             };
             DataResponse.prototype.isValidationSuccessful = function () {
-                return this.status == 3 /* ValidationSuccess */;
+                return this.status == RequestStatus.ValidationSuccess;
             };
             DataResponse.prototype.isValidationFailure = function () {
-                return this.status == 2 /* ValidationFailure */;
+                return this.status == RequestStatus.ValidationFailure;
             };
             return DataResponse;
         })();
@@ -91,8 +91,7 @@ var Triarc;
     var Data;
     (function (Data) {
         angular.module('ng').config([
-            "$httpProvider",
-            function ($httpProvider) {
+            "$httpProvider", function ($httpProvider) {
                 $httpProvider.defaults.transformResponse.push(function (responseData) {
                     convertDateStringsToDates(responseData);
                     return responseData;
@@ -126,8 +125,7 @@ var Triarc;
         Data.convertDateStringsToDates = convertDateStringsToDates;
         Data.mod = angular.module("tlDataServices", []);
         Data.mod.config([
-            '$httpProvider',
-            function ($httpProvider) {
+            '$httpProvider', function ($httpProvider) {
                 $httpProvider.defaults.headers.post = {
                     'Content-Type': 'application/json'
                 };
@@ -165,9 +163,9 @@ var Triarc;
                         responseData = +responseData;
                     else if (dataRequest.returnType != "string" && responseData == "null")
                         responseData = null;
-                    deferred.resolve(new Data.DataResponse(responseData, 0 /* Success */, response));
+                    deferred.resolve(new Data.DataResponse(responseData, Data.RequestStatus.Success, response));
                 }, function (response) {
-                    deferred.reject(new Data.DataResponse(response.data, 1 /* Failure */, response));
+                    deferred.reject(new Data.DataResponse(response.data, Data.RequestStatus.Failure, response));
                 });
                 return deferred.promise;
             };
@@ -178,8 +176,9 @@ var Triarc;
             function RequestSenderProvider() {
                 var _this = this;
                 this.$get = ['$http', '$q', '$location', function ($http, $q, $location) {
-                    return new RequestSenderService(_this.urlPerService, $http, $q, $location);
-                }];
+                        return new RequestSenderService(_this.urlPerService, $http, $q, $location);
+                    }
+                ];
                 this.urlPerService = {};
             }
             RequestSenderProvider.prototype.setUrl = function (newUrl, proxyServiceName) {

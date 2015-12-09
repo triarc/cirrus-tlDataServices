@@ -1,10 +1,9 @@
 {
   "name": "cirrus-tlDataServices",
   "version": "0.0.21",
-  "authors": [
-    "Marco Bachmann <mb@triarc-labs.com>"
+  "main": [
+    "tlDataServices.js"
   ],
-  "main": "tlDataServices.js",
   "moduleType": [
     "globals"
   ],
