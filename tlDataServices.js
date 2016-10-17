@@ -12,7 +12,7 @@ var Triarc;
                 this.sendData = sendData;
             }
             return DataRequest;
-        })();
+        }());
         Data.DataRequest = DataRequest;
     })(Data = Triarc.Data || (Triarc.Data = {}));
 })(Triarc || (Triarc = {}));
@@ -40,7 +40,7 @@ var Triarc;
                 return this.status == RequestStatus.ValidationFailure;
             };
             return DataResponse;
-        })();
+        }());
         Data.DataResponse = DataResponse;
         (function (RequestStatus) {
             RequestStatus[RequestStatus["Success"] = 0] = "Success";
@@ -99,7 +99,7 @@ var Triarc;
             }
         ]);
         // fixed
-        var regexIso8601 = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
+        var regexIso8601 = /^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z$)/;
         function convertDateStringsToDates(input) {
             // Ignore things that aren't objects.
             if (typeof input !== "object")
@@ -170,7 +170,7 @@ var Triarc;
                 return deferred.promise;
             };
             return RequestSenderService;
-        })();
+        }());
         Data.RequestSenderService = RequestSenderService;
         var RequestSenderProvider = (function () {
             function RequestSenderProvider() {
@@ -185,7 +185,7 @@ var Triarc;
                 this.urlPerService[proxyServiceName] = newUrl;
             };
             return RequestSenderProvider;
-        })();
+        }());
         Data.RequestSenderProvider = RequestSenderProvider;
         Data.mod.provider('$requestSender', [RequestSenderProvider]);
     })(Data = Triarc.Data || (Triarc.Data = {}));
